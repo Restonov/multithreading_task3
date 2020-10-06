@@ -46,8 +46,6 @@ public class LogisticStation {
     }
 
     public void takeTerminal(LogisticStationTerminal terminal) throws CustomException {
-        System.out.println(terminal.getId() + " свободен");
-        System.out.println(terminal.getId() + " принял " + terminal.getCounter() + " грузовиков");
         if (busyTerminals.remove(terminal)) {
             try {
                 freeTerminals.put(terminal);

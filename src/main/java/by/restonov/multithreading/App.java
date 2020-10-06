@@ -58,7 +58,6 @@ public class App {
 
         long after = System.currentTimeMillis();
 
-        System.out.println(after - before);
 
 //        TimeUnit timeUnit = TimeUnit.SECONDS;
 //        try {

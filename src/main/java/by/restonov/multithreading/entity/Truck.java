@@ -60,11 +60,9 @@ public class Truck extends Thread{
     }
 
     public void performLoad(LogisticStationTerminal terminal) {
-        System.out.println(truckId + " загружен" + " в терминале " + terminal.getId());
     }
 
     public void performUnload(LogisticStationTerminal terminal) {
-        System.out.println(truckId + " разгружен"  + " в терминале " + terminal.getId());
     }
 
 
