@@ -1,6 +1,7 @@
 package by.restonov.multithreading.comparator;
 
 import by.restonov.multithreading.entity.Truck;
+import by.restonov.multithreading.state.impl.TruckState;
 import org.testng.Assert;
 import org.testng.AssertJUnit;
 import org.testng.annotations.AfterClass;
@@ -15,8 +16,8 @@ public class TruckComparatorTest extends Assert {
     @BeforeTest
     public void setUp() {
         comparator = new TruckComparator();
-        truck1 = new Truck();
-        truck2 = new Truck();
+        truck1 = new Truck(TruckState.EMPTY);
+        truck2 = new Truck(TruckState.FULL);
 
         truck2.setPerishable(true);
         truck1.setPerishable(false);

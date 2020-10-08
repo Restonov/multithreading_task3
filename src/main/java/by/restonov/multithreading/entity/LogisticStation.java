@@ -1,12 +1,15 @@
 package by.restonov.multithreading.entity;
 
 import by.restonov.multithreading.exception.CustomException;
+import by.restonov.multithreading.state.impl.TerminalState;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
-import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class LogisticStation {
+    private static final Logger logger = LogManager.getLogger();
     private LinkedBlockingQueue<LogisticStationTerminal> freeTerminals;
     private LinkedBlockingQueue<LogisticStationTerminal> busyTerminals;
 
@@ -21,15 +24,13 @@ public class LogisticStation {
         return LogisticStationHolder.instance;
     }
 
-    public void innit(List<LogisticStationTerminal> terminals) {
+    public void init(List<LogisticStationTerminal> terminals) {
         int size = terminals.size();
         busyTerminals = new LinkedBlockingQueue<>(size);
         freeTerminals = new LinkedBlockingQueue<>(size);
         for (LogisticStationTerminal terminal : terminals) {
             freeTerminals.offer(terminal);
         }
-        System.out.println(terminals);
-        System.out.println(freeTerminals);
     }
 
     public LogisticStationTerminal provideTerminal() throws CustomException {
@@ -37,8 +38,8 @@ public class LogisticStation {
         try {
             terminal =freeTerminals.take();
             busyTerminals.put(terminal);
-            System.out.println(terminal.getId() + " занят");
-            terminal.increment();
+            terminal.setCurrentState(TerminalState.BUSY);
+            logger.info(terminal.getId() + " are busy right now");
         } catch (InterruptedException e) {
             throw new CustomException(e);
         }
@@ -46,11 +47,11 @@ public class LogisticStation {
     }
 
     public void takeTerminal(LogisticStationTerminal terminal) throws CustomException {
-        System.out.println(terminal.getId() + " свободен");
-        System.out.println(terminal.getId() + " принял " + terminal.getCounter() + " грузовиков");
         if (busyTerminals.remove(terminal)) {
             try {
                 freeTerminals.put(terminal);
+                terminal.setCurrentState(TerminalState.FREE);
+                logger.info(terminal.getId() + " are free right now");
             } catch (InterruptedException e) {
                 throw new CustomException(e);
             }

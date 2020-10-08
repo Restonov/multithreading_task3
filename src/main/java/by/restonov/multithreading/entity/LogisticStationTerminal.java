@@ -5,30 +5,18 @@ import by.restonov.multithreading.state.BaseState;
 public class LogisticStationTerminal {
     private long terminalId;
     private BaseState currentState;
-    private int counter = 0;
 
-    public LogisticStationTerminal() {
+    public LogisticStationTerminal(BaseState state) {
+        currentState = state;
     }
 
-//    private static class StationTerminalHolder {
-//        private static final LogisticStationTerminal instance = new LogisticStationTerminal();
-//    }
-//
-//    public static LogisticStationTerminal getInstance() {
-//        return StationTerminalHolder.instance;
-//    }
+    public BaseState getCurrentState() {
+        return currentState;
+    }
 
-    public void changeState(BaseState state) {
-        //TODO check if state could be changed
+    public void setCurrentState(BaseState state) {
+        state.notifyReporter();
         this.currentState = state;
-    }
-
-    public void increment() {
-        counter++;
-    }
-
-    public int getCounter() {
-        return counter;
     }
 
     public long getId() {

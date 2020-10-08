@@ -1,2 +1,2 @@
 101, 202, 303, 404, 505
-8, 2, 30, 4, 5, 66, 7, 82, 9, 10
+(1, full, perishable), (105, empty, null), (141, empty, null), (56, full, null), (69, full, perishable), (546, full, null), (135, empty, null), (33, full, null)

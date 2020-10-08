@@ -1,5 +1,5 @@
 package by.restonov.multithreading.state;
 
 public interface BaseState {
-    void someAction();
+    void notifyReporter();
 }
