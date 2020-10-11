@@ -5,29 +5,34 @@ import by.restonov.multithreading.state.BaseState;
 
 public enum TruckState implements BaseState {
 
-    FULL {
+    WORK {
         @Override
-        public void notifyReporter() {
-            reporter.countLoad();
+        public void sendReport() {
+            reporter.addWorkPerformed();
         }
     },
 
-    EMPTY {
+    MOVE_TO_TERMINAL {
         @Override
-        public void notifyReporter() {
-            reporter.countUnload();
+        public void sendReport() {
+            reporter.addAllowedTrucks();
+        }
+    },
+
+    WAIT {
+        @Override
+        public void sendReport() {
+            reporter.addWaitingTrucks();
+        }
+    },
+
+    LEAVE_STATION {
+        @Override
+        public void sendReport() {
+            reporter.addGoneTrucks();
         }
     };
 
     OperationReporter reporter = OperationReporter.getInstance();
 
-    public static BaseState defineState(String state) {
-        BaseState currentState = null;
-        if (state.equals("full")) {
-            currentState = TruckState.FULL;
-        } else if (state.equals("empty")) {
-            currentState = TruckState.EMPTY;
-        }
-        return currentState;
-    }
 }

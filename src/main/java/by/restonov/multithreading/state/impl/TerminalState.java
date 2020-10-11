@@ -7,14 +7,14 @@ public enum TerminalState implements BaseState {
 
     BUSY{
         @Override
-        public void notifyReporter() {
+        public void sendReport() {
             reporter.countBusy();
         }
     },
 
     FREE {
         @Override
-        public void notifyReporter() {
+        public void sendReport() {
             reporter.countFree();
         }
     };

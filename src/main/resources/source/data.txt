@@ -1,2 +1,2 @@
 101, 202, 303, 404, 505
-(1, full, perishable), (105, empty, null), (141, empty, null), (56, full, null), (69, full, perishable), (546, full, null), (135, empty, null), (33, full, null)
+(1, hasGoods, perishable), (105, empty, null), (141, empty, null), (56, hasGoods, null), (69, hasGoods, perishable), (546, hasGoods, null), (135, empty, null), (77, hasGoods, null)
